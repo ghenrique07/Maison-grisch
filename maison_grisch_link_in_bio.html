@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON GRISCH & CO. | Private Luxury Archive</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0a0a0a',
+                        charcoal: '#121212',
+                        gold: {
+                            light: '#e6c762',
+                            DEFAULT: '#d4af37',
+                            dark: '#aa8820',
+                            muted: 'rgba(212, 175, 55, 0.25)'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(14px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
+                    },
+                    animation: {
+                        'fade-in-1': 'fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in-2': 'fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards',
+                        'fade-in-3': 'fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards',
+                        'fade-in-4': 'fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards',
+                        'shimmer-slow': 'shimmer 6s infinite linear'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient background luxury glow */
+        .ambient-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, rgba(10, 10, 10, 0) 65%);
+        }
+
+        /* Subtle gold shimmer border effect for Primary CTA */
+        .gold-card-primary {
+            background: linear-gradient(135deg, rgba(24, 24, 24, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            box-shadow: 0 4px 25px -5px rgba(212, 175, 55, 0.12);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gold-card-primary:hover {
+            border-color: #d4af37;
+            box-shadow: 0 8px 30px -4px rgba(212, 175, 55, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Secondary luxury cards */
+        .luxury-card {
+            background: rgba(18, 18, 18, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(10px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            background: rgba(22, 22, 22, 0.95);
+            box-shadow: 0 6px 24px -6px rgba(212, 175, 55, 0.14);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-gold selection:text-obsidian">
+
+    <!-- Background Ambient Light -->
+    <div class="fixed inset-0 ambient-glow pointer-events-none z-0"></div>
+
+    <!-- Top Floating Bar: Share & Quick Config Toggle -->
+    <div class="w-full max-w-[440px] mx-auto px-5 pt-5 flex justify-between items-center z-20">
+        <button onclick="openConfigModal()" title="Configurar seu Número e Instagram" class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 hover:text-gold transition flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-white/10 hover:border-gold/40 bg-charcoal/80">
+            <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span>Personalizar Links</span>
+        </button>
+
+        <button onclick="copyBioPageInfo()" class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 hover:text-gold transition flex items-center gap-1.5 py-1.5 px-3 rounded-full border border-white/10 hover:border-gold/40 bg-charcoal/80">
+            <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+            </svg>
+            <span>Copiar Link WhatsApp</span>
+        </button>
+    </div>
+
+    <!-- Main Mobile-First Container (max-width 440px) -->
+    <main class="w-full max-w-[440px] mx-auto px-5 pt-6 pb-12 z-10 flex-grow flex flex-col justify-center">
+        
+        <!-- 1. HEADER -->
+        <header class="text-center mb-9 opacity-0 animate-fade-in-1">
+            <!-- Minimalist Monogram Emblem in Gold Frame ('MG') -->
+            <div class="relative inline-flex items-center justify-center w-20 h-20 mb-5 rounded-2xl border border-gold/50 bg-gradient-to-b from-charcoal to-obsidian shadow-lg group">
+                <div class="absolute inset-1 rounded-xl border border-gold/20 pointer-events-none"></div>
+                <span class="font-serif text-3xl font-semibold tracking-widest text-gold select-none">MG</span>
+                <!-- Subtle corner accents -->
+                <span class="absolute -top-0.5 -left-0.5 w-2 h-2 border-t border-l border-gold"></span>
+                <span class="absolute -top-0.5 -right-0.5 w-2 h-2 border-t border-r border-gold"></span>
+                <span class="absolute -bottom-0.5 -left-0.5 w-2 h-2 border-b border-l border-gold"></span>
+                <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 border-b border-r border-gold"></span>
+            </div>
+
+            <!-- Brand Title -->
+            <h1 class="font-serif text-3xl sm:text-4xl font-medium tracking-[0.18em] text-white uppercase mb-2">
+                MAISON GRISCH &amp; CO.
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-[11px] font-light tracking-[0.28em] text-gold uppercase mb-5">
+                CURADORIA PRIVADA • LUXURY ARCHIVE
+            </p>
+
+            <!-- Divider Line -->
+            <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold/60 to-transparent mx-auto mb-5"></div>
+
+            <!-- Brand Pills / Tags -->
+            <div class="flex flex-wrap justify-center items-center gap-x-2 gap-y-1.5 px-2 text-[9.5px] font-normal tracking-[0.2em] text-neutral-400 uppercase leading-relaxed">
+                <span class="hover:text-white transition-colors cursor-default">MONCLER</span>
+                <span class="text-gold/60">•</span>
+                <span class="hover:text-white transition-colors cursor-default">RALPH LAUREN</span>
+                <span class="text-gold/60">•</span>
+                <span class="hover:text-white transition-colors cursor-default">LORO PIANA</span>
+                <span class="text-gold/60">•</span>
+                <span class="hover:text-white transition-colors cursor-default">CHROME HEARTS</span>
+                <span class="text-gold/60">•</span>
+                <span class="hover:text-white transition-colors cursor-default">MAISON MARGIELA</span>
+                <span class="text-gold/60">•</span>
+                <span class="hover:text-white transition-colors cursor-default">ON</span>
+            </div>
+        </header>
+
+        <!-- 2. INTERACTIVE ACTION BUTTONS -->
+        <section class="space-y-3.5 opacity-0 animate-fade-in-2" aria-label="Links Principais">
+            
+            <!-- Primary CTA: Atendimento Concierge (WhatsApp) -->
+            <a id="primaryWhatsappBtn" 
+               href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Vim%20pelo%20perfil%20da%20Maison%20Grisch%20e%20gostaria%20de%20conhecer%20o%20acervo%20dispon%C3%ADvel." 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="gold-card-primary block w-full rounded-xl p-4 sm:p-4.5 relative overflow-hidden group">
+                
+                <!-- Subtle status indicator -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-obsidian transition-colors duration-300 shrink-0">
+                            <!-- WhatsApp / Concierge Icon -->
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.461 5.605-1.47c1.906 1.251 4.178 1.976 6.605 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs sm:text-sm font-medium tracking-[0.12em] uppercase text-white group-hover:text-gold transition-colors">
+                                    Atendimento Concierge
+                                </span>
+                                <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Concierge Online"></span>
+                            </div>
+                            <p class="text-[10px] tracking-[0.15em] text-neutral-400 uppercase mt-0.5">
+                                WhatsApp Direto • Consultoria Exclusiva
+                            </p>
+                        </div>
+                    </div>
+                    <svg class="w-4 h-4 text-gold transform group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Secondary CTA: Instagram Oficial -->
+            <a id="instagramBtn"
+               href="https://instagram.com/maisongrisch" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="luxury-card block w-full rounded-xl p-4 group">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:border-gold/40 group-hover:text-gold transition-colors shrink-0">
+                            <!-- Instagram Icon -->
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <span id="instagramLabel" class="block text-xs sm:text-sm font-normal tracking-[0.12em] uppercase text-white group-hover:text-gold transition-colors">
+                                Instagram Oficial (@maisongrisch)
+                            </span>
+                            <p class="text-[10px] tracking-[0.14em] text-neutral-400 uppercase mt-0.5">
+                                Drops Diários • Editorial &amp; Lifestyle
+                            </p>
+                        </div>
+                    </div>
+                    <svg class="w-4 h-4 text-neutral-500 group-hover:text-gold transform group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Tertiary CTA: Solicitar Peça Específica (Personal Sourcing) -->
+            <button type="button"
+                    onclick="openSourcingModal()"
+                    class="luxury-card w-full rounded-xl p-4 group text-left">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:border-gold/40 group-hover:text-gold transition-colors shrink-0">
+                            <!-- Diamond / Sourcing Icon -->
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-xs sm:text-sm font-normal tracking-[0.12em] uppercase text-white group-hover:text-gold transition-colors">
+                                Solicitar Peça Específica
+                            </span>
+                            <p class="text-[10px] tracking-[0.14em] text-neutral-400 uppercase mt-0.5">
+                                Personal Sourcing • Encomenda Internacional
+                            </p>
+                        </div>
+                    </div>
+                    <span class="text-[9px] tracking-[0.18em] uppercase px-2 py-1 rounded border border-gold/30 text-gold bg-gold/5 group-hover:bg-gold group-hover:text-obsidian transition-colors shrink-0">
+                        Abrir
+                    </span>
+                </div>
+            </button>
+
+            <!-- Quaternary CTA: Acesso ao Acervo Privado -->
+            <button type="button"
+                    onclick="openArchiveModal()"
+                    class="luxury-card w-full rounded-xl p-4 group text-left">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:border-gold/40 group-hover:text-gold transition-colors shrink-0">
+                            <!-- Archive / Hanger / Key Icon -->
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-xs sm:text-sm font-normal tracking-[0.12em] uppercase text-white group-hover:text-gold transition-colors">
+                                Acesso ao Acervo Privado
+                            </span>
+                            <p class="text-[10px] tracking-[0.14em] text-neutral-400 uppercase mt-0.5">
+                                Peças à Pronta Entrega • Seleção da Semana
+                            </p>
+                        </div>
+                    </div>
+                    <svg class="w-4 h-4 text-neutral-500 group-hover:text-gold transform group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </div>
+            </button>
+
+        </section>
+
+        <!-- Featured Highlight Banner (Collaborative Selection) -->
+        <section class="mt-7 opacity-0 animate-fade-in-3">
+            <div class="rounded-xl border border-white/10 bg-gradient-to-r from-charcoal via-[#161616] to-charcoal p-4 flex items-center justify-between">
+                <div class="space-y-1">
+                    <span class="text-[9px] tracking-[0.25em] text-gold uppercase block">Destaques da Curadoria</span>
+                    <p class="font-serif italic text-base text-neutral-200">Moncler Half-Zip • Loro Piana • Golden Goose</p>
+                </div>
+                <button onclick="openArchiveModal()" class="text-[10px] tracking-[0.2em] uppercase text-white border-b border-gold pb-0.5 hover:text-gold transition shrink-0">
+                    Ver Peças
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. FOOTER -->
+    <footer class="w-full max-w-[440px] mx-auto px-5 pb-8 pt-2 text-center z-10 opacity-0 animate-fade-in-4">
+        <!-- Discrete Authenticity Badge -->
+        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-charcoal/90 mb-4">
+            <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+            </svg>
+            <span class="text-[9.5px] tracking-[0.22em] text-neutral-300 uppercase">
+                100% Authentic • Worldwide Sourcing
+            </span>
+        </div>
+
+        <p class="text-[9px] tracking-[0.2em] text-neutral-500 uppercase">
+            &copy; MAISON GRISCH &amp; CO. TODOS OS DIREITOS RESERVADOS.
+        </p>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- 3. MODAL: PERSONAL SOURCING (ENCOMENDAS)   -->
+    <!-- ========================================== -->
+    <div id="sourcingModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-[420px] rounded-2xl bg-[#111111] border border-gold/40 p-6 shadow-2xl animate-fade-in-1">
+            
+            <!-- Close Button -->
+            <button onclick="closeSourcingModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="text-center mb-5">
+                <span class="text-[9.5px] tracking-[0.25em] text-gold uppercase block mb-1">Concierge Internacional</span>
+                <h2 class="font-serif text-2xl tracking-[0.12em] text-white uppercase">Personal Sourcing</h2>
+                <p class="text-[11px] text-neutral-400 mt-1 font-light">
+                    Selecione a grife e descreva a peça ou tamanho que deseja localizar com exclusividade.
+                </p>
+            </div>
+
+            <form id="sourcingForm" onsubmit="submitSourcingRequest(event)" class="space-y-4">
+                <!-- Brand Selection Pills -->
+                <div>
+                    <label class="block text-[10px] tracking-[0.18em] uppercase text-neutral-300 mb-2">
+                        1. Selecione a Marca
+                    </label>
+                    <div class="grid grid-cols-2 gap-2" id="brandButtonsContainer">
+                        <button type="button" onclick="selectBrand('Moncler')" data-brand="Moncler" class="brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-gold bg-gold/15 text-white transition text-center">
+                            Moncler
+                        </button>
+                        <button type="button" onclick="selectBrand('Ralph Lauren')" data-brand="Ralph Lauren" class="brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-white/10 bg-white/5 text-neutral-300 hover:border-gold/40 transition text-center">
+                            Ralph Lauren
+                        </button>
+                        <button type="button" onclick="selectBrand('Loro Piana')" data-brand="Loro Piana" class="brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-white/10 bg-white/5 text-neutral-300 hover:border-gold/40 transition text-center">
+                            Loro Piana
+                        </button>
+                        <button type="button" onclick="selectBrand('Chrome Hearts')" data-brand="Chrome Hearts" class="brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-white/10 bg-white/5 text-neutral-300 hover:border-gold/40 transition text-center">
+                            Chrome Hearts
+                        </button>
+                        <button type="button" onclick="selectBrand('Maison Margiela')" data-brand="Maison Margiela" class="brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-white/10 bg-white/5 text-neutral-300 hover:border-gold/40 transition text-center">
+                            Maison Margiela
+                        </button>
+                        <button type="button" onclick="selectBrand('Golden Goose / On')" data-brand="Golden Goose / On" class="brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-white/10 bg-white/5 text-neutral-300 hover:border-gold/40 transition text-center">
+                            Golden Goose / On
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Desired Piece Input -->
+                <div>
+                    <label for="sourcingPiece" class="block text-[10px] tracking-[0.18em] uppercase text-neutral-300 mb-1.5">
+                        2. Modelo, Cor ou Referência
+                    </label>
+                    <input type="text" id="sourcingPiece" required placeholder="Ex: Suéter Half-Zip Tricô Azul Marinho" 
+                           class="w-full rounded-lg bg-black/70 border border-white/15 focus:border-gold px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 outline-none transition">
+                </div>
+
+                <!-- Size Input -->
+                <div>
+                    <label for="sourcingSize" class="block text-[10px] tracking-[0.18em] uppercase text-neutral-300 mb-1.5">
+                        3. Tamanho Desejado
+                    </label>
+                    <input type="text" id="sourcingSize" required placeholder="Ex: M / L / 42 EUR" 
+                           class="w-full rounded-lg bg-black/70 border border-white/15 focus:border-gold px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 outline-none transition">
+                </div>
+
+                <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-gold-dark via-gold to-gold-light text-obsidian font-semibold text-xs tracking-[0.18em] uppercase hover:opacity-95 transition shadow-lg">
+                    Enviar Solicitação via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL: ACERVO PRIVADO (CATÁLOGO PREVIEW)   -->
+    <!-- ========================================== -->
+    <div id="archiveModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-[420px] rounded-2xl bg-[#111111] border border-gold/40 p-6 shadow-2xl max-h-[88vh] flex flex-col">
+            
+            <!-- Close Button -->
+            <button onclick="closeArchiveModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="text-center mb-4 shrink-0">
+                <span class="text-[9.5px] tracking-[0.25em] text-gold uppercase block mb-1">Curadoria Maison Grisch</span>
+                <h2 class="font-serif text-2xl tracking-[0.12em] text-white uppercase">Acervo Privado</h2>
+                <p class="text-[11px] text-neutral-400 mt-0.5 font-light">
+                    Clique em uma peça para consultar tamanhos e valores diretamente no WhatsApp.
+                </p>
+            </div>
+
+            <!-- Curated Items List -->
+            <div class="space-y-2.5 overflow-y-auto pr-1 flex-grow">
+                
+                <!-- Item 1: Moncler Half-Zip -->
+                <div onclick="inquireItem('Suéter Moncler Half-Zip Tricô (Off-White / Preto / Navy)')" class="cursor-pointer p-3.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-gold/50 transition flex items-center justify-between group">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-gold uppercase block">MONCLER</span>
+                        <h3 class="text-xs font-medium text-white group-hover:text-gold transition">Tricô Half-Zip Ribbed (3 Cores)</h3>
+                        <p class="text-[10px] text-neutral-400 mt-0.5">Off-White • Preto • Azul Marinho</p>
+                    </div>
+                    <span class="text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 rounded border border-gold/30 text-gold">
+                        Consultar
+                    </span>
+                </div>
+
+                <!-- Item 2: Loro Piana -->
+                <div onclick="inquireItem('Camisa Loro Piana Listrada & Boné Loro Piana')" class="cursor-pointer p-3.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-gold/50 transition flex items-center justify-between group">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-gold uppercase block">LORO PIANA</span>
+                        <h3 class="text-xs font-medium text-white group-hover:text-gold transition">Camisa Listrada Punho Branco &amp; Caps</h3>
+                        <p class="text-[10px] text-neutral-400 mt-0.5">Algodão Egípcio &amp; Lã Storm System</p>
+                    </div>
+                    <span class="text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 rounded border border-gold/30 text-gold">
+                        Consultar
+                    </span>
+                </div>
+
+                <!-- Item 3: Ralph Lauren -->
+                <div onclick="inquireItem('Bermudas Ralph Lauren Veludo Cotelê (Azul / Bege)')" class="cursor-pointer p-3.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-gold/50 transition flex items-center justify-between group">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-gold uppercase block">POLO RALPH LAUREN</span>
+                        <h3 class="text-xs font-medium text-white group-hover:text-gold transition">Bermudas Corduroy &amp; Suéter Polo Bear</h3>
+                        <p class="text-[10px] text-neutral-400 mt-0.5">Veludo Cotelê Azul / Bege • Tricô Clássico</p>
+                    </div>
+                    <span class="text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 rounded border border-gold/30 text-gold">
+                        Consultar
+                    </span>
+                </div>
+
+                <!-- Item 4: Golden Goose -->
+                <div onclick="inquireItem('Sneakers Golden Goose Deluxe Brand')" class="cursor-pointer p-3.5 rounded-xl border border-white/10 bg-white/[0.03] hover:border-gold/50 transition flex items-center justify-between group">
+                    <div>
+                        <span class="text-[9px] tracking-[0.2em] text-gold uppercase block">GOLDEN GOOSE</span>
+                        <h3 class="text-xs font-medium text-white group-hover:text-gold transition">Sneakers Star Edition (Blue &amp; Red)</h3>
+                        <p class="text-[10px] text-neutral-400 mt-0.5">Acompanha Caixa Original &amp; Dustbag</p>
+                    </div>
+                    <span class="text-[9px] tracking-[0.15em] uppercase px-2.5 py-1 rounded border border-gold/30 text-gold">
+                        Consultar
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-white/10 shrink-0">
+                <button onclick="inquireItem('Catálogo Completo da Maison Grisch')" class="w-full py-3 rounded-xl bg-white/10 hover:bg-gold hover:text-obsidian text-white text-[11px] font-medium tracking-[0.18em] uppercase transition">
+                    Solicitar Catálogo Completo no WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL: CONFIGURADOR RÁPIDO (SEU WHATSAPP)  -->
+    <!-- ========================================== -->
+    <div id="configModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="relative w-full max-w-[420px] rounded-2xl bg-[#111111] border border-gold/50 p-6 shadow-2xl">
+            <button onclick="closeConfigModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="mb-4">
+                <span class="text-[9.5px] tracking-[0.25em] text-gold uppercase block mb-1">Configuração da Bio</span>
+                <h2 class="font-serif text-xl tracking-[0.1em] text-white uppercase">Seus Dados de Contato</h2>
+                <p class="text-[11px] text-neutral-400 mt-1 font-light">
+                    Insira seu número de WhatsApp (com DDD) e seu @ do Instagram para atualizar todos os botões da página automaticamente.
+                </p>
+            </div>
+
+            <div class="space-y-3.5">
+                <div>
+                    <label class="block text-[10px] tracking-[0.15em] uppercase text-neutral-300 mb-1">
+                        Número do WhatsApp (Apenas números com DDI 55)
+                    </label>
+                    <input type="text" id="configPhoneInput" value="5511999999999" placeholder="Ex: 5511988887777"
+                           class="w-full rounded-lg bg-black border border-white/15 focus:border-gold px-3.5 py-2 text-xs text-white outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] tracking-[0.15em] uppercase text-neutral-300 mb-1">
+                        Usuário do Instagram (Sem @)
+                    </label>
+                    <input type="text" id="configInstaInput" value="maisongrisch" placeholder="Ex: maisongrisch"
+                           class="w-full rounded-lg bg-black border border-white/15 focus:border-gold px-3.5 py-2 text-xs text-white outline-none">
+                </div>
+
+                <button onclick="saveConfiguration()" class="w-full py-3 rounded-xl bg-gold text-obsidian font-semibold text-xs tracking-[0.16em] uppercase hover:opacity-95 transition">
+                    Atualizar Página Agora
+                </button>
+
+                <!-- Guía Rápido de Como Colocar no Ar -->
+                <div class="mt-4 pt-3 border-t border-white/10 text-left space-y-1.5">
+                    <p class="text-[10px] uppercase tracking-[0.15em] text-gold font-medium">Como publicar de graça em 1 minuto:</p>
+                    <ol class="text-[10.5px] text-neutral-400 space-y-1 list-decimal list-inside leading-relaxed">
+                        <li>Salve este arquivo como <code class="text-white">index.html</code>.</li>
+                        <li>Acesse <span class="text-white underline">app.netlify.com/drop</span> ou <span class="text-white underline">vercel.com</span>.</li>
+                        <li>Arraste o arquivo para lá e copie o link gerado para colocar na Bio do Instagram e TikTok!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+        <div class="px-4 py-2.5 rounded-full bg-gold text-obsidian text-[11px] font-semibold tracking-[0.14em] uppercase shadow-xl flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span id="toastMessage">Link copiado com sucesso!</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Default State
+        let whatsappNumber = '5511999999999';
+        let instagramHandle = 'maisongrisch';
+        let selectedSourcingBrand = 'Moncler';
+
+        const defaultGreeting = 'Olá! Vim pelo perfil da Maison Grisch e gostaria de conhecer o acervo disponível.';
+
+        // Update Main Links dynamically
+        function updatePageLinks() {
+            const encodedGreeting = encodeURIComponent(defaultGreeting);
+            const primaryBtn = document.getElementById('primaryWhatsappBtn');
+            const instaBtn = document.getElementById('instagramBtn');
+            const instaLabel = document.getElementById('instagramLabel');
+
+            primaryBtn.href = `https://wa.me/${whatsappNumber}?text=${encodedGreeting}`;
+            instaBtn.href = `https://instagram.com/${instagramHandle.replace('@', '')}`;
+            instaLabel.textContent = `Instagram Oficial (@${instagramHandle.replace('@', '')})`;
+        }
+
+        // Sourcing Modal Functions
+        function openSourcingModal() {
+            const modal = document.getElementById('sourcingModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeSourcingModal() {
+            const modal = document.getElementById('sourcingModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function selectBrand(brandName) {
+            selectedSourcingBrand = brandName;
+            const buttons = document.querySelectorAll('.brand-option');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-brand') === brandName) {
+                    btn.className = 'brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-gold bg-gold/15 text-white transition text-center';
+                } else {
+                    btn.className = 'brand-option py-2 px-3 rounded-lg text-[10px] tracking-[0.15em] uppercase border border-white/10 bg-white/5 text-neutral-300 hover:border-gold/40 transition text-center';
+                }
+            });
+        }
+
+        function submitSourcingRequest(event) {
+            event.preventDefault();
+            const piece = document.getElementById('sourcingPiece').value.trim();
+            const size = document.getElementById('sourcingSize').value.trim();
+
+            const customMessage = `Olá! Vim pela Bio da Maison Grisch e gostaria de solicitar um Personal Sourcing:\n\n• *Marca:* ${selectedSourcingBrand}\n• *Peça/Modelo:* ${piece}\n• *Tamanho:* ${size}`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(customMessage)}`;
+
+            window.open(whatsappUrl, '_blank');
+            closeSourcingModal();
+        }
+
+        // Archive Modal Functions
+        function openArchiveModal() {
+            const modal = document.getElementById('archiveModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeArchiveModal() {
+            const modal = document.getElementById('archiveModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function inquireItem(itemName) {
+            const message = `Olá! Vim pelo Link da Bio da Maison Grisch e tenho interesse em consultar disponibilidade e valores de: *${itemName}*.`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Config Modal Functions
+        function openConfigModal() {
+            const modal = document.getElementById('configModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeConfigModal() {
+            const modal = document.getElementById('configModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function saveConfiguration() {
+            const rawPhone = document.getElementById('configPhoneInput').value.replace(/\D/g, '');
+            const rawInsta = document.getElementById('configInstaInput').value.trim().replace('@', '');
+
+            if (rawPhone.length >= 10) {
+                whatsappNumber = rawPhone;
+            }
+            if (rawInsta.length > 0) {
+                instagramHandle = rawInsta;
+            }
+
+            updatePageLinks();
+            closeConfigModal();
+            showToast('Contatos atualizados na página!');
+        }
+
+        // Copy Direct WhatsApp Link to Clipboard
+        function copyBioPageInfo() {
+            const linkToCopy = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultGreeting)}`;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = linkToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast('Link direto do WhatsApp copiado!');
+        }
+
+        // Show Custom Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            const sourcingModal = document.getElementById('sourcingModal');
+            const archiveModal = document.getElementById('archiveModal');
+            const configModal = document.getElementById('configModal');
+            if (e.target === sourcingModal) closeSourcingModal();
+            if (e.target === archiveModal) closeArchiveModal();
+            if (e.target === configModal) closeConfigModal();
+        });
+    </script>
+</body>
+</html>
